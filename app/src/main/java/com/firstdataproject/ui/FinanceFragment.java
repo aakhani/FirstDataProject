@@ -16,6 +16,7 @@ import com.firstdataproject.adapter.StockAdapter;
 import com.firstdataproject.model.Stock;
 import com.firstdataproject.rest.ApiClient;
 import com.firstdataproject.rest.ApiInterface;
+import com.firstdataproject.utils.CommonUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,7 +63,13 @@ public class FinanceFragment extends Fragment {
         btnRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               loadData();
+
+                if (CommonUtils.isOnline(getActivity())) {
+                    loadData();
+                }else {
+                    CommonUtils.showToast(getActivity(),"No Internet Connection!");
+                }
+
             }
         });
 
